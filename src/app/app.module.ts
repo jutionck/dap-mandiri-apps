@@ -2,13 +2,16 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { DashboardModule } from './dashboard/dashboard.module';
+import { HomeModule } from './pages/home/home.module';
+import { PagesModule } from './pages/pages.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    DashboardModule
+    SharedModule,
+    PagesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
