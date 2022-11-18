@@ -9,8 +9,7 @@ import { InstructorComponent } from './instructor/instructor.component';
 import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home.component';
 import { CoursesComponent } from './courses/courses.component';
-
-
+import { HomeRoutingModule } from './home-routing.module';
 
 @NgModule({
   declarations: [
@@ -25,10 +24,8 @@ import { CoursesComponent } from './courses/courses.component';
     CoursesComponent
   ],
   imports: [
-    CommonModule
-  ],
-  exports: [
-    HomeComponent
+    CommonModule,
+    HomeRoutingModule
   ]
 })
 export class HomeModule { }
