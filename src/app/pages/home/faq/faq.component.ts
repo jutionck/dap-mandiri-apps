@@ -10,6 +10,16 @@ export class FaqComponent implements OnInit {
   faqs: any[] = [];
   constructor() { }
 
+  // style binding
+  // innerHtml
+  subTitle = '<strong>FAQs</strong> Description';
+
+  styles = {
+    color: 'gold',
+    fontSize: '4rem',
+    fontWeight: '100'
+  }
+
   ngOnInit(): void {
     this.getFaqs();
   }

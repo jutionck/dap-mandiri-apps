@@ -10,7 +10,7 @@
         <div class="card bg-light">
           <div class="card-body text-center">
             <img
-              src="{{ instructor.img }}"
+              [src]="instructor.img"
               class="rounded-circle mb-3"
               alt=""
             />
@@ -20,7 +20,7 @@
               class="social-media"
               *ngFor="let socmed of instructor.socialMedia"
             >
-              <a href="{{ socmed.link }}"
+              <a [href]="socmed.link"
                 ><i class="{{ socmed.icon }} text-dark mx-1"></i
               ></a>
             </span>
