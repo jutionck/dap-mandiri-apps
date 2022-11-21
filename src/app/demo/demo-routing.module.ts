@@ -12,23 +12,21 @@ const routes: Routes = [
     children: [
       {
         // eager loading
-        path: 'child-aa', // -> /component-a/child-aa
+        path: 'child-aa',
         component: ChildAaComponent
       },
       {
-        path: 'child-ab', // /component-a/child-ab
+        path: 'child-ab',
         component: ChildAbComponent
       }
     ]
   },
   {
-    path: 'component-b',
+    // ketika path dibuat seperti ini maka wajib memberikan variabel
+    // setelah e.g component-b/1111
+    // karena path variabel bersifat wajib diisi
+    path: 'component-b/:id',
     component: ComponentBComponent
-  },
-  {
-    path: '',
-    redirectTo: '/demo/component-a',
-    pathMatch: 'full'
   }
 ];
 
