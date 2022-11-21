@@ -6,86 +6,24 @@
       industry
     </p>
     <div class="row g-4">
-      <div class="col-md-6 col-lg-3">
+      <div class="col-md-6 col-lg-3" *ngFor="let instructor of instructors">
         <div class="card bg-light">
           <div class="card-body text-center">
             <img
-              src="https://randomuser.me/api/portraits/men/11.jpg"
+              src="{{ instructor.img }}"
               class="rounded-circle mb-3"
               alt=""
             />
-            <h3 class="card-title mb-3">Jution CK</h3>
-            <p class="card-text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Assumenda accusamus nobis sed cupiditate iusto? Quibusdam.
-            </p>
-            <a href="#"><i class="bi bi-twitter text-dark mx-1"></i></a>
-            <a href="#"><i class="bi bi-facebook text-dark mx-1"></i></a>
-            <a href="#"><i class="bi bi-linkedin text-dark mx-1"></i></a>
-            <a href="#"><i class="bi bi-instagram text-dark mx-1"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="card bg-light">
-          <div class="card-body text-center">
-            <img
-              src="https://randomuser.me/api/portraits/women/11.jpg"
-              class="rounded-circle mb-3"
-              alt=""
-            />
-            <h3 class="card-title mb-3">Kak Tika</h3>
-            <p class="card-text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Assumenda accusamus nobis sed cupiditate iusto? Quibusdam.
-            </p>
-            <a href="#"><i class="bi bi-twitter text-dark mx-1"></i></a>
-            <a href="#"><i class="bi bi-facebook text-dark mx-1"></i></a>
-            <a href="#"><i class="bi bi-linkedin text-dark mx-1"></i></a>
-            <a href="#"><i class="bi bi-instagram text-dark mx-1"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="card bg-light">
-          <div class="card-body text-center">
-            <img
-              src="https://randomuser.me/api/portraits/men/12.jpg"
-              class="rounded-circle mb-3"
-              alt=""
-            />
-            <h3 class="card-title mb-3">Bang Doni</h3>
-            <p class="card-text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Assumenda accusamus nobis sed cupiditate iusto? Quibusdam.
-            </p>
-            <a href="#"><i class="bi bi-twitter text-dark mx-1"></i></a>
-            <a href="#"><i class="bi bi-facebook text-dark mx-1"></i></a>
-            <a href="#"><i class="bi bi-linkedin text-dark mx-1"></i></a>
-            <a href="#"><i class="bi bi-instagram text-dark mx-1"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="card bg-light">
-          <div class="card-body text-center">
-            <img
-              src="https://randomuser.me/api/portraits/men/10.jpg"
-              class="rounded-circle mb-3"
-              alt=""
-            />
-            <h3 class="card-title mb-3">Upcoming</h3>
-            <p class="card-text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Assumenda accusamus nobis sed cupiditate iusto? Quibusdam.
-            </p>
-            <a href="#"><i class="bi bi-twitter text-dark mx-1"></i></a>
-            <a href="#"><i class="bi bi-facebook text-dark mx-1"></i></a>
-            <a href="#"><i class="bi bi-linkedin text-dark mx-1"></i></a>
-            <a href="#"><i class="bi bi-instagram text-dark mx-1"></i></a>
+            <h3 class="card-title mb-3">{{ instructor.name }}</h3>
+            <p class="card-text">{{ instructor.desc }}</p>
+            <span
+              class="social-media"
+              *ngFor="let socmed of instructor.socialMedia"
+            >
+              <a href="{{ socmed.link }}"
+                ><i class="{{ socmed.icon }} text-dark mx-1"></i
+              ></a>
+            </span>
           </div>
         </div>
       </div>

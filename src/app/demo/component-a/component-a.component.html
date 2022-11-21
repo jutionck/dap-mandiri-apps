@@ -14,3 +14,18 @@
 
 <h3>Name: {{ name }}</h3>
 <h3>Address: {{ address }}</h3>
+<h3>Participants: {{ participants }}</h3>
+<h3>{{ 10 * 10 }}</h3>
+<!-- Tidak dapat melakukan assignment ://error -->
+<!-- <h3>{{ name = 'Pluto'}}</h3> -->
+<!-- Tidak dapat melakukan binding object secara literal :// [object, object] -->
+<!-- <h3>Language: {{ languages }}</h3> -->
+<h3>Language: {{ languages.name }} {{ languages.status}}</h3>
+<h3>Language: {{ onViewLanguage() }}</h3>
+<h3>onMessage(): {{ onMessage() }}</h3>
+
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let employee of employees">
+    {{ employee.name }}
+  </li>
+</ul>
