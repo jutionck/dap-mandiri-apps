@@ -6,13 +6,17 @@ import { ComponentAComponent } from './component-a/component-a.component';
 import { ComponentBComponent } from './component-b/component-b.component';
 import { RouterModule } from '@angular/router';
 import { DemoRoutingModule } from './demo-routing.module';
+import { ParentComponent } from './parent/parent.component';
+import { ChildComponent } from './child/child.component';
 
 @NgModule({
   declarations: [
     ComponentAComponent,
     ComponentBComponent,
     ChildAaComponent,
-    ChildAbComponent
+    ChildAbComponent,
+    ParentComponent,
+    ChildComponent
   ],
   imports: [
     CommonModule,

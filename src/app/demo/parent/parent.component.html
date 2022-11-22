@@ -1,0 +1,21 @@
+<section class="p-5">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-mandirian">
+        <h1 class="text-danger">Parent Component</h1>
+        <h1>{{ counter }}</h1>
+        <h3>Form Mandirian</h3>
+        <h4 class="text-primary">{{ mandirian }}</h4>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="child-component">
+        <app-child
+          [title]="title"
+          [(counter)]="counter"
+          [(mandirian)]="mandirian"
+        ></app-child>
+      </div>
+    </div>
+  </div>
+</section>
