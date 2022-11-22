@@ -39,6 +39,11 @@ export class ComponentAComponent implements OnInit {
       name: 'Rahma',
       address: 'Bintang',
       unit: 'IT'
+    },
+    {
+      name: 'Fulan',
+      address: 'Arab',
+      unit: 'IT'
     }
   ]
 
