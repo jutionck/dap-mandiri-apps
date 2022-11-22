@@ -1,33 +1,41 @@
-<h1>Component A</h1>
-<ul class="list-group mb-5">
-  <li class="list-group-item">
-    <a routerLink="/component-a/child-aa">Child AA</a>
-  </li>
-  <li class="list-group-item">
-    <a routerLink="/component-a/child-ab">Child AB</a>
-  </li>
-</ul>
+<section id="component-a" class="p-5">
+  <h1>Component A</h1>
+  <ul class="list-group mb-5">
+    <li class="list-group-item">
+      <a routerLink="/demo/component-a/child-aa">Child AA</a>
+    </li>
+    <li class="list-group-item">
+      <a routerLink="/demo/component-a/child-ab">Child AB</a>
+    </li>
+  </ul>
 
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 
-<a routerLink="/demo/component-b" class="btn btn-outline-primary">Go to component b</a>
+  <div class="mt-5 mb-5">
+    <h3 [innerHTML]="messageHover" (mouseover)="mouseOver()" (mouseout)="mouseOut()"></h3>
+  </div>
 
-<h3>Name: {{ name }}</h3>
-<h3>Address: {{ address }}</h3>
-<h3>Participants: {{ participants }}</h3>
-<h3>{{ 10 * 10 }}</h3>
-<!-- Tidak dapat melakukan assignment ://error -->
-<!-- <h3>{{ name = 'Pluto'}}</h3> -->
-<!-- Tidak dapat melakukan binding object secara literal :// [object, object] -->
-<!-- <h3>Language: {{ languages }}</h3> -->
-<h3>Language: {{ languages.name }} {{ languages.status}}</h3>
-<h3>Language: {{ onViewLanguage() }}</h3>
-<h3>onMessage(): {{ onMessage() }}</h3>
+  <div class="mb-5">
+    <input type="text" class="form-control" (change)="onMessageInput($event)">
+  </div>
 
-<ul class="list-group">
-  <li class="list-group-item" *ngFor="let employee of employees; index as i">
-    <span [ngStyle]="{'color': i % 2 == 0 ? 'gold' : 'blue'}"> 
-      {{ employee.name }}
-    </span>
-  </li>
-</ul>
+  <h5 class="mt-t mb-5">{{messageInput}}</h5>
+
+  <div class="btn-group">
+    <button
+      routerLink="/demo/component-b/1"
+      class="btn btn-outline-primary mb-5"
+    >
+      Go to component b
+    </button>
+    <button
+      class="btn btn-outline-warning mb-5"
+      [disabled]="isDisabled"
+      (click)="showMe()"
+    >
+      Show Me
+    </button>
+  </div>
+
+  <h4>{{ message }}</h4>
+</section>

@@ -34,4 +34,14 @@ export class ComponentBComponent implements OnInit {
     })
   }
 
+  message: string = '';
+  onChangeMessage($event: any): void {
+    const { value } = $event.target;
+    console.log(value)
+    if (value === 'admin') {
+      this.message = value;
+    } else {
+      this.message = 'anda bukan admin';
+    }
+  }
 }

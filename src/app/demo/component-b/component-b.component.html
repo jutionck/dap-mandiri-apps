@@ -1,2 +1,9 @@
-<h1>Component B {{ id }}</h1>
-<a routerLink="/demo/component-a" class="btn btn-outline-primary">Go to component a</a>
+<section class="p-5">
+  <h1>Component B {{ id }}</h1>
+  <a routerLink="/demo/component-a" class="btn btn-outline-primary">Go to component a</a>
+
+  <input type="text" class="form-control" (change)="onChangeMessage($event)">
+  <h5>{{message}}</h5>
+</section>
+
+

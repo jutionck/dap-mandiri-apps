@@ -116,5 +116,4 @@ export class InstructorComponent implements OnInit {
     // assign properti di atas dengan variabel baris ke 22;
     this.instructors = instructors;
   }
-
 }
