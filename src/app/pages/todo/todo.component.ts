@@ -42,6 +42,20 @@ export class TodoComponent implements OnInit {
   onSaveTodo(todo: Todo): void {
     todo.id = this.todos.length + 1;
     this.todos.push(todo)
+    sessionStorage.setItem(TODO, JSON.stringify(this.todos));
+  }
+
+  onToggleTodo(todo: Todo): void {
+    todo.isCompleted = !todo.isCompleted;
+    sessionStorage.setItem(TODO, JSON.stringify(this.todos));
+  }
+
+  onDeleteTodo(todo: Todo): void {
+    for (let index = 0; index < this.todos.length; index++) {
+      if (this.todos[index].id === todo.id) {
+        this.todos.splice(index, 1);
+      }
+    }
     sessionStorage.setItem(TODO, JSON.stringify(this.todos))
   }
 
