@@ -8,6 +8,8 @@ import { TODO, Todo } from './model/todo';
 })
 export class TodoComponent implements OnInit {
   todos: Todo[] = [];
+  todo!: Todo;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -40,9 +42,17 @@ export class TodoComponent implements OnInit {
   }
 
   onSaveTodo(todo: Todo): void {
-    todo.id = this.todos.length + 1;
-    this.todos.push(todo)
+    if (todo.id) {
+      this.todos = this.todos.map((t) => {
+        if (t.id === todo.id) t = todo;
+        return t;
+      });
+    } else {
+      todo.id = this.todos.length + 1;
+      this.todos.push(todo)
+    }
     sessionStorage.setItem(TODO, JSON.stringify(this.todos));
+
   }
 
   onToggleTodo(todo: Todo): void {
@@ -57,6 +67,10 @@ export class TodoComponent implements OnInit {
       }
     }
     sessionStorage.setItem(TODO, JSON.stringify(this.todos))
+  }
+
+  onEditTodo(todo: Todo): void {
+    this.todo = todo;
   }
 
 }
