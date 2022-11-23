@@ -9,9 +9,11 @@ import { Todo } from './model/todo';
 export class TodoComponent implements OnInit {
   todos: Todo[] = [];
   constructor() { }
+
   ngOnInit(): void {
     this.loadTodos();
   }
+
   loadTodos(): void {
     this.todos = [
       {
@@ -25,6 +27,11 @@ export class TodoComponent implements OnInit {
         isCompleted: true
       }
     ]
+  }
+
+  onSaveTodo(todo: Todo): void {
+    todo.id = this.todos.length + 1;
+    this.todos.push(todo)
   }
 
 }
