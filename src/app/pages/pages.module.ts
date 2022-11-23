@@ -9,7 +9,7 @@ import { HomeModule } from './home/home.module';
   imports: [
     CommonModule,
     PagesRoutingModule,
-    HomeModule
+    HomeModule,
   ],
   exports: []
 })

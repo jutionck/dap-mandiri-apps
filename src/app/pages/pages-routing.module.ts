@@ -18,10 +18,11 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'pages/resume',
+    path: 'resume',
     loadChildren: () =>
       import('./resume/resume.module').then((m) => m.ResumeModule),
   },
+  { path: 'todos', loadChildren: () => import('./todo/todo.module').then(m => m.TodoModule) },
 ];
 
 @NgModule({
