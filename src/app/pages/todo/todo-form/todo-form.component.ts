@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Todo, TodoField } from '../model/todo';
 
 @Component({
@@ -44,5 +44,16 @@ export class TodoFormComponent implements OnInit, OnChanges {
       this.todoForm.controls[TodoField.NAME]?.setValue(todo.name);
       this.todoForm.controls[TodoField.IS_COMPLETED]?.setValue(todo.isCompleted);
     }
+  }
+
+  // getter
+  // tambahkan ! untuk memberikan kesan getter name
+  // di bawah tidak akan null
+  get name() { return this.todoForm.get('name')! }
+
+  // ini pasti akan bernilai true
+  isFormValid(todoField: string): boolean {
+    const control: AbstractControl = this.todoForm.get(todoField) as AbstractControl;
+    return (control && control.invalid && (control.dirty || control.touched))
   }
 }
