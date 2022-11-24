@@ -21,6 +21,7 @@
     "@types/mapbox-gl": "^2.7.8",
     "bootstrap": "^5.2.2",
     "bootstrap-icons": "^1.10.2",
+    "date-fns": "^2.29.3",
     "mapbox-gl": "^2.11.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

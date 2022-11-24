@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TODO, Todo } from './model/todo';
+import id from 'date-fns/locale/id';
 
 @Component({
   selector: 'app-todo',
@@ -10,6 +11,8 @@ export class TodoComponent implements OnInit {
   todos: Todo[] = [];
   private _todo!: Todo;
   isLoading: boolean = true;
+  today: Date = new Date();
+  locale: Locale = id
 
   constructor() { }
 
