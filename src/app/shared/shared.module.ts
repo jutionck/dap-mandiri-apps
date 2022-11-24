@@ -4,12 +4,16 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RouterModule } from '@angular/router';
+import { HighlightDirective } from './directives/highlight.directive';
+import { BsButtonDirective } from './directives/bs-button.directive';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    HighlightDirective,
+    BsButtonDirective
   ],
   imports: [
     CommonModule,
@@ -18,6 +22,8 @@ import { RouterModule } from '@angular/router';
   exports: [
     HeaderComponent,
     FooterComponent,
+    HighlightDirective,
+    BsButtonDirective
   ]
 })
 export class SharedModule { }
