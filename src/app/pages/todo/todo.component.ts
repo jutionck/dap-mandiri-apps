@@ -8,9 +8,12 @@ import { TODO, Todo } from './model/todo';
 })
 export class TodoComponent implements OnInit {
   todos: Todo[] = [];
-  todo!: Todo;
+  private _todo!: Todo;
 
   constructor() { }
+
+  get todo(): Todo { return this._todo }
+  set todo(todo: Todo) { this.onSaveTodo(todo) }
 
   ngOnInit(): void {
     this.loadTodos();
@@ -70,7 +73,7 @@ export class TodoComponent implements OnInit {
   }
 
   onEditTodo(todo: Todo): void {
-    this.todo = todo;
+    this._todo = todo;
   }
 
 }

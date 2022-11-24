@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Employee } from '../101/employee';
 
 @Component({
   selector: 'app-component-a',
@@ -56,6 +57,15 @@ export class ComponentAComponent implements OnInit {
     setTimeout(() => {
       this.isDisabled = !this.isDisabled
     }, 5000);
+    const employee: Employee = new Employee();
+    employee.fullName = 'Joko';
+    employee.address = 'Bali';
+
+    // employee._fullName = 'Juli'; // private -> kena error
+    // console.log(employee.fullName);
+    // console.log(employee.address);
+    // console.log(employee.toString());
+
   }
 
   // penerapan event binding

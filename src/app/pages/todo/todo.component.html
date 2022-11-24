@@ -16,10 +16,7 @@
         ></app-todo-list>
       </div>
       <div class="col-md-6 col-sm-12 mt-3">
-        <app-todo-form
-          (saveTodo)="onSaveTodo($event)"
-          [todo]="todo"
-        ></app-todo-form>
+        <app-todo-form [(todo)]="todo"></app-todo-form>
       </div>
     </div>
   </div>

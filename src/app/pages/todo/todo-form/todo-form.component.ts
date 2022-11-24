@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { timeout } from 'rxjs';
 import { Todo, TodoField } from '../model/todo';
 
 @Component({
@@ -9,8 +8,9 @@ import { Todo, TodoField } from '../model/todo';
   styleUrls: ['./todo-form.component.scss'],
 })
 export class TodoFormComponent implements OnInit, OnChanges {
-  @Input() todo!: Todo;
-  @Output() saveTodo: EventEmitter<Todo> = new EventEmitter<Todo>();
+  @Input() todo?: Todo;
+  @Output() todoChange: EventEmitter<Todo> = new EventEmitter<Todo>();
+  // @Output() saveTodo: EventEmitter<Todo> = new EventEmitter<Todo>();
 
   constructor() { }
 
@@ -22,7 +22,9 @@ export class TodoFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    this.setFormValue(this.todo)
+    if (this.todo) {
+      this.setFormValue(this.todo)
+    }
   }
 
   todoForm: FormGroup = new FormGroup({
@@ -32,7 +34,7 @@ export class TodoFormComponent implements OnInit, OnChanges {
   });
 
   onSubmit(): void {
-    this.saveTodo.emit(this.todoForm.value);
+    this.todoChange.emit(this.todoForm.value);
     this.todoForm.reset();
   }
 
