@@ -9,6 +9,7 @@ import { TODO, Todo } from './model/todo';
 export class TodoComponent implements OnInit {
   todos: Todo[] = [];
   private _todo!: Todo;
+  isLoading: boolean = true;
 
   constructor() { }
 
@@ -16,10 +17,13 @@ export class TodoComponent implements OnInit {
   set todo(todo: Todo) { this.onSaveTodo(todo) }
 
   ngOnInit(): void {
-    this.loadTodos();
+    setTimeout(() => {
+      this.loadTodos();
+    }, 1500);
   }
 
   loadTodos(): void {
+    this.isLoading = false;
     // penyebutan lembutnya adalah CASTING
     const sessionTodos: string = sessionStorage.getItem(TODO) as string;
     if (!sessionTodos) {

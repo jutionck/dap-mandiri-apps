@@ -13,6 +13,7 @@
           (toggleTodo)="onToggleTodo($event)"
           (deleteTodo)="onDeleteTodo($event)"
           (editTodo)="onEditTodo($event)"
+          [isLoading]="isLoading"
         ></app-todo-list>
       </div>
       <div class="col-md-6 col-sm-12 mt-3">
