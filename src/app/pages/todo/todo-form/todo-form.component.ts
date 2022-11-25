@@ -24,29 +24,27 @@ export class TodoFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe({
-      next: (params: Params) => {
-        const { id } = params;
-        // +id ini menjadikan yang string -> number
-        // berlaku untuk bilangan bulat
-        this.todo = this.todoService.get(+id);
-        this.setFormValue(this.todo);
-      },
-    });
+    // this.route.params.subscribe({
+    //   next: (params: Params) => {
+    //     const { id } = params;
+    //     // +id ini menjadikan yang string -> number
+    //     // berlaku untuk bilangan bulat
+    //     this.todo = this.todoService.get(+id);
+    //     this.setFormValue(this.todo);
+    //   },
+    // });
   }
 
   todoForm: FormGroup = new FormGroup({
     [TodoField.ID]: new FormControl(null),
     [TodoField.NAME]: new FormControl('', [
       Validators.required,
-      Validators.minLength(30),
-      Validators.email
-    ]),
+      Validators.minLength(3)]),
     [TodoField.IS_COMPLETED]: new FormControl(false),
   });
 
   onSubmit(): void {
-    this.todoService.save(this.todoForm.value);
+    this.todoService.save(this.todoForm.value).subscribe({});
     this.todoForm.reset();
     // akan me-navigasi route path yang yang tertuju
     // e.g /todos

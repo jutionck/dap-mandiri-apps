@@ -19,14 +19,18 @@ export class TodoListComponent implements OnInit {
 
   onLoadTodo(): void {
     this.isLoading = false;
-    this.todos = this.todoService.getAll();
+    this.todoService.getAll().subscribe({
+      next: (todos: Todo[]) => {
+        this.todos = todos;
+      }
+    })
   }
 
   onCheckTodo(todo: Todo): void {
-    this.todoService.toggle(todo);
+    // this.todoService.toggle(todo);
   }
 
   onDeleteTodo(todo: Todo): void {
-    this.todoService.remove(todo.id)
+    // this.todoService.remove(todo.id)
   }
 }
