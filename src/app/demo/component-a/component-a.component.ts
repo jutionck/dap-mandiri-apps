@@ -1,20 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterContentInit,
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  DoCheck,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Employee } from '../101/employee';
 
 @Component({
   selector: 'app-component-a',
   templateUrl: './component-a.component.html',
-  styleUrls: ['./component-a.component.scss']
+  styleUrls: ['./component-a.component.scss'],
 })
-export class ComponentAComponent implements OnInit {
+export class ComponentAComponent
+  implements
+  OnInit,
+  OnChanges,
+  OnDestroy,
+  DoCheck,
+  AfterContentInit,
+  AfterContentChecked,
+  AfterViewInit,
+  AfterViewChecked {
   name: string = 'Millea';
   address: string = 'Bandung';
   participants: string[] = ['Bulan', 'Bintang', 'Matahari'];
   languages = {
     name: 'Angular',
-    status: 'Advanced'
-  }
+    status: 'Advanced',
+  };
 
   isDisabled: boolean = true;
 
@@ -23,49 +43,60 @@ export class ComponentAComponent implements OnInit {
   }
 
   onViewLanguage(): string {
-    return `${this.languages.name} ${this.languages.status}`
+    return `${this.languages.name} ${this.languages.status}`;
   }
 
   employees = [
     {
       name: 'Adi',
       address: 'Bulan',
-      unit: 'Keuangan'
+      unit: 'Keuangan',
     },
     {
       name: 'Adam',
       address: 'Matahari',
-      unit: 'Audit'
+      unit: 'Audit',
     },
     {
       name: 'Rahma',
       address: 'Bintang',
-      unit: 'IT'
+      unit: 'IT',
     },
     {
       name: 'Fulan',
       address: 'Arab',
-      unit: 'IT'
-    }
-  ]
+      unit: 'IT',
+    },
+  ];
 
-  constructor(
-    // private readonly route: ActivatedRoute
-  ) { }
-
+  componentName = 'Component A';
+  constructor() {
+    console.log(`constructor ${this.componentName} called!`);
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('changes:', changes);
+    console.log(`ngOnChanges ${this.componentName} called!`);
+  }
   ngOnInit(): void {
-    setTimeout(() => {
-      this.isDisabled = !this.isDisabled
-    }, 5000);
-    const employee: Employee = new Employee();
-    employee.fullName = 'Joko';
-    employee.address = 'Bali';
-
-    // employee._fullName = 'Juli'; // private -> kena error
-    // console.log(employee.fullName);
-    // console.log(employee.address);
-    // console.log(employee.toString());
-
+    console.log(`ngOnInit ${this.componentName} called!`);
+  }
+  ngOnDestroy(): void {
+    console.log(`ngOnDestroy ${this.componentName} called!`);
+  }
+  ngDoCheck(): void {
+    console.log(`ngDoCheck ${this.componentName} called!`);
+  }
+  ngAfterContentInit(): void {
+    console.log(`ngAfterContentInit ${this.componentName} called!`);
+  }
+  ngAfterContentChecked(): void {
+    console.log(`ngAfterContentChecked ${this.componentName} called!`);
+  }
+  ngAfterViewInit(): void {
+    console.log(`ngAfterViewInit ${this.componentName} called!`);
+  }
+  ngAfterViewChecked(): void {
+    console.log(`ngAfterViewChecked ${this.componentName} called!`);
   }
 
   // penerapan event binding
@@ -88,6 +119,8 @@ export class ComponentAComponent implements OnInit {
     console.log('$event:', $event);
     console.log('$event.target.value:', $event.target.value);
     const { value } = $event.target;
-    value.toLowerCase() === 'mandiri' ? this.messageInput = 'Aku mandirian' : this.messageInput = 'Aku tetep mandirian';
+    value.toLowerCase() === 'mandiri'
+      ? (this.messageInput = 'Aku mandirian')
+      : (this.messageInput = 'Aku tetep mandirian');
   }
 }
