@@ -39,7 +39,8 @@ export class TodoFormComponent implements OnInit {
     [TodoField.ID]: new FormControl(null),
     [TodoField.NAME]: new FormControl('', [
       Validators.required,
-      Validators.minLength(3),
+      Validators.minLength(30),
+      Validators.email
     ]),
     [TodoField.IS_COMPLETED]: new FormControl(false),
   });
@@ -61,13 +62,6 @@ export class TodoFormComponent implements OnInit {
         todo.isCompleted
       );
     }
-  }
-
-  // getter
-  // tambahkan ! untuk memberikan kesan getter name
-  // di bawah tidak akan null
-  get name() {
-    return this.todoForm.get('name')!;
   }
 
   // ini pasti akan bernilai true

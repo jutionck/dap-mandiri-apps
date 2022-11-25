@@ -21,13 +21,11 @@
         <button appBsButton color="success" [disabled]="!todoForm.valid">
           ADD
         </button>
-        <div class="invalid-feedback" *ngIf="name.errors?.['required']">
-          Todo wajib diisi
-        </div>
-        <div class="invalid-feedback" *ngIf="name.errors?.['minlength']">
-          Todo wajib diisi minimal 3 karakter
-        </div>
       </div>
+      <app-validation-message
+      [control]="todoForm.get('name')"
+      [field]="'todo'"
+    ></app-validation-message>
     </form>
   </div>
 </div>
