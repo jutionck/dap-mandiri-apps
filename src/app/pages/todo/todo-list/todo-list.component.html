@@ -1,4 +1,4 @@
-<h4>{{'List' | uppercase}}</h4>
+<h4>{{ "List" | uppercase }}</h4>
 <div class="spinner-border" role="status" *ngIf="isLoading; else showTodo">
   <span class="visually-hidden">Loading...</span>
 </div>
@@ -15,12 +15,12 @@
           />
           &nbsp;
           <label class="form-check-label">
-          <span
-            class="text-decoration-line-through"
-            *ngIf="todo.isCompleted; else isNotCompleted"
-          >
-            {{ todo.name }}
-          </span>
+            <span
+              class="text-decoration-line-through"
+              *ngIf="todo.isCompleted; else isNotCompleted"
+            >
+              {{ todo.name }}
+            </span>
             <ng-template #isNotCompleted>{{ todo.name }}</ng-template>
           </label>
           &nbsp;
@@ -34,7 +34,7 @@
           </button>
           <button
             class="btn btn-link btn-sm float-end"
-            (click)="onEditTodo(todo)"
+            routerLink="/todos/{{ todo.id }}"
           >
             <i class="bi bi-pencil-square" style="font-size: 1.2rem"></i>
           </button>
@@ -43,4 +43,3 @@
     </ul>
   </div>
 </ng-template>
-
