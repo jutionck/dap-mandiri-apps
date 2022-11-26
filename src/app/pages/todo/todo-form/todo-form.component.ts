@@ -6,7 +6,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { map } from 'rxjs';
 import { TODO, Todo, TodoField } from '../model/todo';
 import { TodoService } from '../service/todo.service';
 
@@ -24,15 +23,17 @@ export class TodoFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.route.params.subscribe({
-    //   next: (params: Params) => {
-    //     const { id } = params;
-    //     // +id ini menjadikan yang string -> number
-    //     // berlaku untuk bilangan bulat
-    //     this.todo = this.todoService.get(+id);
-    //     this.setFormValue(this.todo);
-    //   },
-    // });
+    this.route.params.subscribe({
+      next: (params: Params) => {
+        const { id } = params;
+        this.todoService.get(+id).subscribe({
+          next: (todo) => {
+            this.todo = todo;
+            this.setFormValue(this.todo);
+          }
+        })
+      },
+    });
   }
 
   todoForm: FormGroup = new FormGroup({
@@ -46,8 +47,6 @@ export class TodoFormComponent implements OnInit {
   onSubmit(): void {
     this.todoService.save(this.todoForm.value).subscribe({});
     this.todoForm.reset();
-    // akan me-navigasi route path yang yang tertuju
-    // e.g /todos
     this.router.navigateByUrl(TODO)
   }
 
@@ -62,7 +61,6 @@ export class TodoFormComponent implements OnInit {
     }
   }
 
-  // ini pasti akan bernilai true
   isFormValid(todoField: string): boolean {
     const control: AbstractControl = this.todoForm.get(
       todoField

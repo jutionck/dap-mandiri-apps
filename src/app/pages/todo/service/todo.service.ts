@@ -50,6 +50,47 @@ export class TodoService implements ITodoService {
     })
   }
 
+  get(id: number): Observable<Todo> {
+    return new Observable<Todo>((observer: Observer<Todo>) => {
+      try {
+        const todo: Todo = this.todos.find((t) => t.id === id) as Todo;
+        observer.next(todo);
+      } catch (err: any) {
+        observer.error(err.message)
+      }
+    })
+  }
+
+  remove(id: number): Observable<void> {
+    return new Observable<void>((observer: Observer<void>) => {
+      try {
+        for (let index = 0; index < this.todos.length; index++) {
+          if (this.todos[index].id === id) {
+            this.todos.splice(index, 1);
+          }
+        }
+        this.setToStorage();
+        observer.next();
+      } catch (err: any) {
+        observer.error(err.message)
+      }
+    })
+  }
+
+  toggle(todo: Todo): Observable<void> {
+    return new Observable<void>((observer: Observer<void>) => {
+      try {
+        this.todos.forEach((t) => {
+          if (t.id === todo.id) t.isCompleted = !t.isCompleted
+          this.setToStorage();
+          observer.next();
+        })
+      } catch (err: any) {
+        observer.error(err.message)
+      }
+    })
+  }
+
   private setToStorage(): void {
     this.storage.setItem(TODO, JSON.stringify(this.todos));
   }
