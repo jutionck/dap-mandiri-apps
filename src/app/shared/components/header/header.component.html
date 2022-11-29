@@ -78,13 +78,24 @@
           </ul>
         </li>
       </ul>
-      <button
-        type="button"
-        class="btn btn-primary btn-light login"
-        routerLink="/auth/login"
-      >
-        LOGIN
-      </button>
+      <ng-container *ngIf="!onLoggedIn(); else isLoggedIn">
+        <button
+          type="button"
+          class="btn btn-primary btn-light login"
+          routerLink="/auth/login"
+        >
+          LOGIN
+        </button>
+      </ng-container>
+      <ng-template #isLoggedIn>
+        <button
+          type="button"
+          class="btn btn-primary btn-light login"
+          (click)="onLoggedOut()"
+        >
+          LOGOUT
+        </button>
+      </ng-template>
     </div>
   </div>
 </nav>
