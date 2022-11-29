@@ -5,7 +5,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { map } from 'rxjs';
 import Swal from 'sweetalert2';
 import { LoginResponse } from '../../model/login.model';
 import { AuthService } from '../../service/auth.service';
@@ -18,7 +19,8 @@ import { AuthService } from '../../service/auth.service';
 export class LoginComponent implements OnInit {
   constructor(
     private readonly authService: AuthService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly route: ActivatedRoute
   ) { }
 
   loginForm: FormGroup = new FormGroup({
@@ -32,8 +34,14 @@ export class LoginComponent implements OnInit {
     const payload = this.loginForm.value;
     this.authService.login(payload).subscribe({
       next: (token: LoginResponse | null) => {
-        if (token) this.router.navigateByUrl('todos');
-        else {
+        if (token) {
+          this.route.queryParams.subscribe({
+            next: (params: Params) => {
+              const { next } = params;
+              this.router.navigateByUrl(next).finally();
+            },
+          });
+        } else {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
