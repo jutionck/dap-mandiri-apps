@@ -1,10 +1,11 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { RouteGuard } from "../shared/guard/route.guard";
 import { ChildAaComponent } from "./component-a/child-aa/child-aa.component";
 import { ChildAbComponent } from "./component-a/child-ab/child-ab.component";
 import { ComponentAComponent } from "./component-a/component-a.component";
 import { ComponentBComponent } from "./component-b/component-b.component";
-import {ParentComponent} from "./parent/parent.component";
+import { ParentComponent } from "./parent/parent.component";
 
 const routes: Routes = [
   {

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { RouteGuard } from '../shared/guard/route.guard';
 
 const routes: Routes = [
   {
@@ -22,7 +23,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./resume/resume.module').then((m) => m.ResumeModule),
   },
-  { path: 'todos', loadChildren: () => import('./todo/todo.module').then(m => m.TodoModule) },
+  {
+    path: 'todos',
+    canActivate: [RouteGuard],
+    canActivateChild: [RouteGuard],
+    loadChildren: () => import('./todo/todo.module').then(m => m.TodoModule)
+  },
 ];
 
 @NgModule({
