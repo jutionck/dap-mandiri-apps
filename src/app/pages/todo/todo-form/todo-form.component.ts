@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ApiResponse } from 'src/app/shared/models/api-response.model';
 import { TODO, Todo, TodoField } from '../model/todo';
 import { TodoService } from '../service/todo.service';
 
@@ -26,10 +27,9 @@ export class TodoFormComponent implements OnInit {
     this.route.params.subscribe({
       next: (params: Params) => {
         const { id } = params;
-        this.todoService.get(+id).subscribe({
-          next: (todo) => {
-            this.todo = todo;
-            this.setFormValue(this.todo);
+        this.todoService.get(id).subscribe({
+          next: (response: ApiResponse<Todo>) => {
+            this.setFormValue(response.data);
           }
         })
       },
@@ -40,14 +40,15 @@ export class TodoFormComponent implements OnInit {
     [TodoField.ID]: new FormControl(null),
     [TodoField.NAME]: new FormControl('', [
       Validators.required,
-      Validators.minLength(3)]),
+      Validators.minLength(3),
+    ]),
     [TodoField.IS_COMPLETED]: new FormControl(false),
   });
 
   onSubmit(): void {
-    this.todoService.save(this.todoForm.value).subscribe({});
-    this.todoForm.reset();
-    this.router.navigateByUrl(TODO)
+    this.todoService.save(this.todoForm.value).subscribe(() => {
+      this.router.navigateByUrl(TODO);
+    });
   }
 
   setFormValue(todo: Todo): void {
