@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { map } from 'rxjs';
 import { ApiResponse } from 'src/app/shared/models/api-response.model';
 import { TODO, Todo, TodoField } from '../model/todo';
 import { TodoService } from '../service/todo.service';
@@ -24,16 +25,18 @@ export class TodoFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe({
-      next: (params: Params) => {
-        const { id } = params;
-        this.todoService.get(id).subscribe({
-          next: (response: ApiResponse<Todo>) => {
-            this.setFormValue(response.data);
-          }
+    this.route.params
+      .pipe(
+        map((params: Params) => {
+          // kita buat pengecekan dahulu apakah ada ID yang dikirim atau tidak
+          return params['id'] ? params['id'] : '';
         })
-      },
-    });
+      )
+      .subscribe((id: string) => {
+        this.todoService.get(id).subscribe((response: ApiResponse<Todo>) => {
+          this.setFormValue(response.data);
+        });
+      });
   }
 
   todoForm: FormGroup = new FormGroup({
@@ -53,7 +56,6 @@ export class TodoFormComponent implements OnInit {
 
   setFormValue(todo: Todo): void {
     if (todo) {
-      console.log('todo:', todo);
       this.todoForm.controls[TodoField.ID]?.setValue(todo.id);
       this.todoForm.controls[TodoField.NAME]?.setValue(todo.name);
       this.todoForm.controls[TodoField.IS_COMPLETED]?.setValue(
