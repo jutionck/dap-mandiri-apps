@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -7,6 +8,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { map } from 'rxjs';
+import { ApiResponse } from 'src/app/shared/models/api-response.model';
 import Swal from 'sweetalert2';
 import { LoginResponse } from '../../model/login.model';
 import { AuthService } from '../../service/auth.service';
@@ -17,6 +19,7 @@ import { AuthService } from '../../service/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  private storage: Storage = sessionStorage;
   constructor(
     private readonly authService: AuthService,
     private readonly router: Router,
@@ -33,23 +36,33 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     const payload = this.loginForm.value;
     this.authService.login(payload).subscribe({
-      next: (token: LoginResponse | null) => {
-        if (token) {
-          this.route.queryParams.subscribe({
-            next: (params: Params) => {
-              const { next } = params;
-              this.router.navigateByUrl(next).finally();
-            },
-          });
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Email atau Password salah!',
-          });
-        }
+      next: (response: ApiResponse<LoginResponse>) => {
+        this.onSuccessLoggedIn(response);
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        this.onErrorLoggedIn(errorResponse);
+      }
+    });
+  }
+
+  private onSuccessLoggedIn(response: ApiResponse<LoginResponse>): void {
+    const { accessToken } = response.data;
+    this.storage.setItem('token', accessToken)
+    this.route.queryParams.subscribe({
+      next: (params: Params) => {
+        const { next } = params;
+        this.router.navigateByUrl(next).finally();
       },
     });
+  }
+  private onErrorLoggedIn(errorResponse: HttpErrorResponse): void {
+    if (errorResponse.status === 401) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Email atau Password salah!',
+      });
+    }
   }
 
   isFormValid(field: string): boolean {
